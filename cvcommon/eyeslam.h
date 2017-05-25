@@ -18,11 +18,9 @@
 
 
 #include "array.h"
-#include "filterab.h"
 #include "math3dgeom.h"
 //#include "MicronVisionSim_Def.h"
 
-#include "zstring.h"
 //#include "KalmanFilter.h"
 
 #include <iostream>
@@ -272,7 +270,6 @@ private:
 	int mICPfail;
 	int mFail;
 
-	FilterAB *mTxFilter, *mTyFilter, *mThetaFilter;
 	KalmanPosVel2D *mTxFilterKF, *mTyFilterKF, *mThetaFilterKF;
 
 	cv::Point2f calcMeanPt(const std::vector<cv::Point2f> &pts);

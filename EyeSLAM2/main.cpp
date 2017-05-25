@@ -4,7 +4,6 @@
 #include <string>
 
 #include "veintracer.h"
-#include "fileio.h"
 #include "eyeslam.h"
 #include "fpstracker.h"
 
@@ -156,13 +155,9 @@ int main(int argc, char *argv[])
 	return 0;
 #endif
 
-#if READ_VIDEO
 	cv::VideoCapture inputVideo;
 	inputVideo.open(filename);
-#else
-	Array<String> files;
-	FileIO::scanDirForFiles("*.jpg", files, filename);
-#endif
+
 	EyeSLAM eyeSLAM;
 
 	eyeSLAM.start();

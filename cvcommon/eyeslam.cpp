@@ -74,9 +74,6 @@ EyeSLAM::EyeSLAM()
 	mSkipped = 0;
 	iteration = 0;
 	mFirst = 1;
-	mTxFilter = 0;
-	mTyFilter = 0;
-	mThetaFilter = 0;
 	mTxFilterKF = 0;
 	mTyFilterKF = 0;
 	mThetaFilterKF = 0;
@@ -91,16 +88,10 @@ EyeSLAM::~EyeSLAM()
 {
 	this->stopThread();
 
-	delete mTxFilter;
-	delete mTyFilter;
-	delete mThetaFilter;
 	delete mTxFilterKF;
 	delete mTyFilterKF;
 	delete mThetaFilterKF;
 
-	mTxFilter = 0;
-	mTyFilter = 0;
-	mThetaFilter = 0;
 	mTxFilterKF = 0;
 	mTyFilterKF = 0;
 	mThetaFilterKF = 0;
@@ -222,13 +213,6 @@ void EyeSLAM::execute()
 				//fail ICP counter. Reset every time the program reset
 				mICPfail = 0;
 				Fail = 0;
-
-				delete mTxFilter;
-				delete mTyFilter;
-				delete mThetaFilter;
-				mTxFilter = new FilterAB("linPosFilter2Butter0.1.txt");
-				mTyFilter = new FilterAB("linPosFilter2Butter0.1.txt");
-				mThetaFilter = new FilterAB("linPosFilter2Butter0.1.txt");
 
 				delete mTxFilterKF;
 				delete mTyFilterKF;
@@ -595,32 +579,14 @@ void EyeSLAM::execute()
 				float theta = atan2(R.at<float>(1, 0), R.at<float>(0, 0));
 				float tx = Tf.at<float>(0, 0);
 				float ty = Tf.at<float>(1, 0);
-				// Low pass
-				if (0)
-				{
-					theta = mThetaFilter->filter(theta);
-					Tf.at<float>(0, 0) = mTxFilter->filter(tx);
-					Tf.at<float>(1, 0) = mTyFilter->filter(ty);
-					if (first)
-					{
-						for (int i = 0; i < 100; i++)
-						{
-							theta = mThetaFilter->filter(theta);
-							Tf.at<float>(0, 0) = mTxFilter->filter(Tf.at<float>(0, 0));
-							Tf.at<float>(1, 0) = mTyFilter->filter(Tf.at<float>(1, 0));
-						}
-					}
-				}
-				else
-				{
-					mThetaFilterKF->predict();
-					mTxFilterKF->predict();
-					mTyFilterKF->predict();
 
-					theta = mThetaFilterKF->correct(theta);
-					Tf.at<float>(0, 0) = mTxFilterKF->correct(tx);
-					Tf.at<float>(1, 0) = mTyFilterKF->correct(ty);
-				}
+				mThetaFilterKF->predict();
+				mTxFilterKF->predict();
+				mTyFilterKF->predict();
+
+				theta = mThetaFilterKF->correct(theta);
+				Tf.at<float>(0, 0) = mTxFilterKF->correct(tx);
+				Tf.at<float>(1, 0) = mTyFilterKF->correct(ty);
 
 				Rf.at<float>(0, 0) = cos(theta);
 				Rf.at<float>(0, 1) = -sin(theta);
@@ -1376,9 +1342,6 @@ void EyeSLAM::stop(void)
 	mSkipped = 0;
 	iteration = 0;
 	mFirst = 1;
-	mTxFilter = 0;
-	mTyFilter = 0;
-	mThetaFilter = 0;
 	mTxFilterKF = 0;
 	mTyFilterKF = 0;
 	mThetaFilterKF = 0;

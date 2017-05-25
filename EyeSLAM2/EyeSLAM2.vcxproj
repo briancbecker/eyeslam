@@ -147,11 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\common\fileio.cpp" />
-    <ClCompile Include="..\common\filterab.cpp" />
     <ClCompile Include="..\common\mutex.cpp" />
     <ClCompile Include="..\common\thread.cpp" />
-    <ClCompile Include="..\common\zstring.cpp" />
     <ClCompile Include="..\cvcommon\eyeslam.cpp" />
     <ClCompile Include="..\cvcommon\math3dgeom.cpp" />
     <ClCompile Include="..\cvcommon\scanMatching.cpp" />
@@ -161,15 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\array.h" />
-    <ClInclude Include="..\common\circulararray.h" />
-    <ClInclude Include="..\common\fileio.h" />
-    <ClInclude Include="..\common\filterab.h" />
     <ClInclude Include="..\common\fpstracker.h" />
     <ClInclude Include="..\common\macros.h" />
     <ClInclude Include="..\common\mutex.h" />
     <ClInclude Include="..\common\queue.h" />
     <ClInclude Include="..\common\thread.h" />
-    <ClInclude Include="..\common\zstring.h" />
     <ClInclude Include="..\cvcommon\eyeslam.h" />
     <ClInclude Include="..\cvcommon\math3dgeom.h" />
     <ClInclude Include="..\cvcommon\scanMatching.h" />
