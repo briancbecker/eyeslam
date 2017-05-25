@@ -1,5 +1,4 @@
 #include "eyeslam.h"
-#include "skeletonize.h"
 #include "def_MicronVision.h"
 
 #define STAND_ALONE_GUI 0
