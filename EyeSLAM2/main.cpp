@@ -7,14 +7,6 @@
 #include "eyeslam.h"
 #include "fpstracker.h"
 
-//#define VEIN_PATH "D:\\EyeSLAM\\Sungwook\\Testing\\Static_With_Fiducials\\Large\\"
-//#define VEIN_PATH "D:\\EyeSLAM\\videos\\Thu May 16 17_11_00 2013_cool.mp4"
-//#define VEIN_PATH "D:\\EyeSLAM\\05162013_PigEye\\eye2\\Thu May 16 17_16_52 2013__reallygood\\video_xvid_combined.mp4"
-//#define VEIN_PATH "D:\\GDrive\\EyeSLAM_shared\\Videos\\\Youtube\\Best\\23G VITRECTOMY - ENDOLASER FOR PROLIFERATIVE DIABETIC RETINOPATHY-01.mp4"
-
-//#define VEIN_PATH "D:\\EyeSLAM\\Sungwook\\dynamic_with_fiducials.mp4"
-
-//#define VEIN_PATH "F:\\Videos\\ours\\dynamic_with_fiducials_Large.mp4"
 #define VEIN_PATH "F:\\Videos\\ours\\good\\Thu May 16 17_11_00 2013_cool_snip1.avi"
 
 //#define VIDEO_TIMING "D:\\GDrive\\EyeSLAM_shared\\Results\\2015_08_27_TimingInfo_v4.csv"
@@ -27,15 +19,6 @@
 #define SAVE_VIDEO 0
 
 #define DRAW_TEXT 0
-
-void rotate(cv::Mat& src, double angle, cv::Mat& dst)
-{
-    int len = std::max(src.cols, src.rows);
-    cv::Point2f pt(len/2., len/2.);
-    cv::Mat r = cv::getRotationMatrix2D(pt, angle, 1.0);
-
-    cv::warpAffine(src, dst, r, cv::Size(len, len));
-}
 
 void set_label(cv::Mat& im, cv::Rect r, const std::string label)
 {

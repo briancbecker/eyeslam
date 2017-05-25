@@ -39,9 +39,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\cvcommon\math3dgeom.cpp">
-      <Filter>cvcommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\cvcommon\scanMatching.cpp">
       <Filter>cvcommon</Filter>
     </ClCompile>
@@ -69,9 +66,6 @@
       <Filter>cvcommon</Filter>
     </ClInclude>
     <ClInclude Include="..\cvcommon\veintracer.h">
-      <Filter>cvcommon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cvcommon\math3dgeom.h">
       <Filter>cvcommon</Filter>
     </ClInclude>
     <ClInclude Include="..\cvcommon\scanMatching.h">
