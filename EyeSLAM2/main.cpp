@@ -324,6 +324,27 @@ int main(int argc, char *argv[])
 			cv::waitKey(1);
 		}
 
+		cv::Mat Rf;
+		cv::Mat Tf;
+		eyeSLAM.getTrans(Rf, Tf);
+#if 0
+		static FILE *fp = fopen("test.txt", "wb");
+		fprintf(fp, "%f,%f\n", Tf.at<float>(0,0), Tf.at<float>(1,0));
+		fflush(fp);
+#else
+		static FILE *fp = fopen("test.txt", "rb");
+		float x = 0.0;
+		float y = 0.0;
+		fscanf(fp, "%f,%f\n", &x, &y);
+		std::cout << "x: " << x << " => " << std::abs(Tf.at<float>(0,0) - x) << std::endl;
+		std::cout << "y: " << x << " => " << std::abs(Tf.at<float>(1,0) - y) << std::endl;
+		if (std::abs(Tf.at<float>(0,0) - x) > 1e-3 || std::abs(Tf.at<float>(1,0) - y) > 1e-3)
+		{
+			std::cerr << "ERRORRRRR!!!" << std::endl;
+			cv::waitKey(-1);
+		}
+#endif
+
 		TimingInfo oneFrameTimingInfo;
 		eyeSLAM.GetTiming(oneFrameTimingInfo);
 
