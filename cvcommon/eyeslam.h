@@ -227,7 +227,6 @@ public:
 private:
 	CvMat *m_pMl, *m_pMr;
 	cv::Mat H;
-	Math3dGeom m_geom;
 public:
 	cv::Mat TR3d;
 	bool bFlagTR;

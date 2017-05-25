@@ -1387,7 +1387,6 @@ cv::Mat EyeSLAM::estimate3DTransform(void)
 
 	int nMaxPts = 200;
 
-	slam2dLeft = m_geom.randSampling(slam2dLeft, nMaxPts);
 
 
 
@@ -1401,8 +1400,7 @@ cv::Mat EyeSLAM::estimate3DTransform(void)
 
 
 	//_PrintResult("t1 : %d ms", timeGetTime() - time);
-	for (int i =0 ; i < slam2dLeft.size() ; i++)
-		slam3dPts.push_back(m_geom.reproject(m_pMl, slam2dLeft[i], m_pMr, slam2dRight[i]));
+
 
 	//_PrintResult("t2 : %d ms", timeGetTime() - time);
 	/////////////////////////////////////////////////////////////////////////
@@ -1412,7 +1410,6 @@ cv::Mat EyeSLAM::estimate3DTransform(void)
 
 
 	std::vector<cv::Point2f> prevPt2dLeft; 
-	cv::perspectiveTransform(slam2dLeft, prevPt2dLeft, localTR.inv());
 	//std::vector<cv::Point2f> prevPt2dLeft = m_geom.apply2dTransform(localTR.inv(), slam2dLeft);
 
 
@@ -1423,12 +1420,7 @@ cv::Mat EyeSLAM::estimate3DTransform(void)
 
 	std::vector<cv::Point3f> prevPt3d;
 
-	//_PrintResult("H : %d ms", timeGetTime() - time);
-	for (int i =0 ; i < prevPt2dLeft.size() ; i++)
-		prevPt3d.push_back(m_geom.reproject(m_pMl, prevPt2dLeft[i], m_pMr, prevPt2dRight[i]));
-
 	//_PrintResult("Estimate 3d : %d ms", timeGetTime() - time);
-	TR = m_geom.estimate3dTransform(prevPt3d, slam3dPts);
 	//_PrintMat(TR);
 
 	//_PrintResult("All : %d ms", timeGetTime() - time);
@@ -1527,12 +1519,6 @@ void EyeSLAM::getVeinMapfromH(std::vector<cv::Point2f> &map)
 		 {
 			 std::vector<cv::Point3f> slam3dPts;
 			 std::vector<cv::Point2f> slam2dPtsProj;
-
-			 for (int i =0 ; i < slam2dLeft.size() ; i++)
-			 {
-				 slam3dPts.push_back(m_geom.reproject(m_pMl, slam2dLeft[i], m_pMr, map[i]));
-				 slam2dPtsProj.push_back( m_geom.project(slam3dPts[i], m_pMr));
-			 }
 
 		 }
 		
