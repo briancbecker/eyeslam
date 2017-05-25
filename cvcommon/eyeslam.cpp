@@ -1,5 +1,4 @@
 #include "eyeslam.h"
-#include "def_MicronVision.h"
 
 #define STAND_ALONE_GUI 0
 #define CULL_BAD_COLORS 1
